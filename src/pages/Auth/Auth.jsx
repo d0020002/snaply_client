@@ -1,108 +1,109 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Auth.css";
 import Logo from "../../img/logo.png";
 
 const Auth = () => {
+  
+  const [isSignUp, setIsSignUp] = useState(false);
   return (
     <div className="Auth">
+      {/* left side */}
+
       <div className="a-left">
         <img src={Logo} alt="" />
+
         <div className="Webname">
           <h1>Snaply</h1>
           <h6>Explore the ideas throughout the world</h6>
         </div>
       </div>
 
-      <LogIn/>
-    </div>
-  );
-};
-function LogIn() {
-    return (
+      {/* right form side */}
+
       <div className="a-right">
         <form className="infoForm authForm">
-          <h3>Log In</h3>
-  
+          <h3>{isSignUp ? "Register" : "Login"}</h3>
+          {isSignUp && (
+            <div>
+              <input
+                required
+                type="text"
+                placeholder="First Name"
+                className="infoInput"
+                name="firstname"
+              />
+              <input
+                required
+                type="text"
+                placeholder="Last Name"
+                className="infoInput"
+                name="lastname"
+              />
+            </div>
+          )}
+
           <div>
             <input
+              required
               type="text"
               placeholder="Username"
               className="infoInput"
               name="username"
             />
           </div>
-  
           <div>
             <input
+              required
               type="password"
               className="infoInput"
               placeholder="Password"
               name="password"
             />
+            {isSignUp && (
+              <input
+                required
+                type="password"
+                className="infoInput"
+                name="confirmpass"
+                placeholder="Confirm Password"
+              />
+            )}
           </div>
-  
+
+          <span
+            style={{
+              color: "red",
+              fontSize: "12px",
+              alignSelf: "flex-end",
+              marginRight: "5px",
+            }}
+          >
+            *Confirm password is not same
+          </span>
           <div>
-              <span style={{ fontSize: "12px" }}>
-                Don't have an account Sign up
-              </span>
-            <button className="button infoButton">Login</button>
+            <span
+              style={{
+                fontSize: "12px",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
+              onClick={() => {
+                setIsSignUp((prev) => !prev);
+              }}
+            >
+              {isSignUp
+                ? "Already have an account Login"
+                : "Don't have an account Sign up"}
+            </span>
+            <button
+              className="button infoButton"
+              type="Submit"
+            >
+            </button>
           </div>
         </form>
       </div>
-    );
-  }
-function SignUp() {
-  return (
-    <div className="a-right">
-      <form className="infoForm authForm">
-        <h3>Sign up</h3>
-
-        <div>
-          <input
-            type="text"
-            placeholder="First Name"
-            className="infoInput"
-            name="firstname"
-          />
-          <input
-            type="text"
-            placeholder="Last Name"
-            className="infoInput"
-            name="lastname"
-          />
-        </div>
-
-        <div>
-          <input
-            type="text"
-            className="infoInput"
-            name="username"
-            placeholder="Usernames"
-          />
-        </div>
-
-        <div>
-          <input
-            type="text"
-            className="infoInput"
-            name="password"
-            placeholder="Password"
-          />
-          <input
-            type="text"
-            className="infoInput"
-            name="confirmpass"
-            placeholder="Confirm Password"
-          />
-        </div>
-
-        <div>
-            <span style={{fontSize: '12px'}}>Already have an account. Login!</span>
-        </div>
-        <button className="button infoButton" type="submit">Signup</button>
-      </form>
     </div>
   );
-}
-
+};
 export default Auth;
