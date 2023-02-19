@@ -35,7 +35,7 @@ function App() {
 //         />
 //       </Routes>
 //     </div>
-   <h1> Update coming soon </h1>
+   <h1>  </h1>
   );
 }
 
